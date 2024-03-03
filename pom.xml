@@ -13,7 +13,7 @@
 	<groupId>app.portfolio-jofregf.vercel</groupId>
 	<artifactId>microservices-commerce</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-
+	<packaging>pom</packaging>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
