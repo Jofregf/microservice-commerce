@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: ms-inventory
-      POSTGRES_USER: admin
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456789
     ports:
       - 5431:5431
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: ms-products
-      POSTGRES_USER: admin
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456789
     ports:
       - 5432:5432
