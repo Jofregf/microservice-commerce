@@ -1,8 +1,6 @@
 package app.portfoliojofregf.vercel.orders_service.service;
 
-import app.portfoliojofregf.vercel.orders_service.model.dtos.BaseResponse;
-import app.portfoliojofregf.vercel.orders_service.model.dtos.OrderItemRequest;
-import app.portfoliojofregf.vercel.orders_service.model.dtos.OrderRequest;
+import app.portfoliojofregf.vercel.orders_service.model.dtos.*;
 import app.portfoliojofregf.vercel.orders_service.model.entity.Order;
 import app.portfoliojofregf.vercel.orders_service.model.entity.OrderItems;
 import app.portfoliojofregf.vercel.orders_service.repository.OrderRepository;
@@ -10,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,6 +39,20 @@ public class OrderService {
         } else {
             throw new IllegalArgumentException("Some of the products are not in stock");
         }
+    }
+
+    public List<OrderResponse> getAllOrders(){
+        List<Order> orders = this.orderRepository.findAll();
+        return orders.stream().map(this::mapToOrderResponse).toList();
+    }
+
+    private OrderResponse mapToOrderResponse(Order order) {
+        return new OrderResponse(order.getId(), order.getOrderNumber(),
+                order.getOrderItems().stream().map(this::mapToOrderItemRequest).toList());
+    }
+
+    private OrderItemsResponse mapToOrderItemRequest(OrderItems orderItems) {
+        return new OrderItemsResponse(orderItems.getId(), orderItems.getSku(), orderItems.getPrice(), orderItems.getQuantity());
     }
 
     private OrderItems mapOrderItemRequestToOrderItem(OrderItemRequest orderItemRequest, Order order) {

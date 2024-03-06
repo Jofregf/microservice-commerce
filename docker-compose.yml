@@ -24,7 +24,7 @@ services:
       MYSQL_DATABASE: ms-orders
       MYSQL_USER: admin
       MYSQL_PASSWORD: 123456789
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 123456789
     ports:
       - 3306:3306
     expose:
