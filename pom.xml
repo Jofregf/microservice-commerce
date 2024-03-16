@@ -14,12 +14,14 @@
 	<artifactId>microservices-commerce</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>Microservices Ecommerce</name>
+	<description>Spring Boot Microservices</description>
 
 	<properties>
-		<spring-cloud.version>2023.0.0</spring-cloud.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-cloud.version>2023.0.0</spring-cloud.version>
 	</properties>
 
 	<modules>
@@ -47,12 +49,7 @@
 	</dependencyManagement>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+
 	</build>
 
 </project>
