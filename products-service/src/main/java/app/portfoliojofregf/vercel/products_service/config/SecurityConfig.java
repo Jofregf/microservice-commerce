@@ -27,10 +27,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
+                .securityMatcher("/**").authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+//                .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers(request ->
 //                                        request.getRequestURI().contains("/actuator/products")).permitAll()
-                                .anyRequest().authenticated())
+//                                .anyRequest().authenticated())
                 .oauth2ResourceServer(configure -> configure.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter())));
 
         return http.build();
@@ -53,6 +54,7 @@ class KeyCloakRealmRoleConverter implements Converter<Jwt, Collection<GrantedAut
             return List.of();
         }
         final Map<String, List<String>> realmAccess = (Map<String, List<String>>) jwt.getClaims().get("realm_access");
+
         return realmAccess.get("roles").stream()
                 .map(roleName -> "ROLE_" + roleName)
                 .map(SimpleGrantedAuthority::new)
