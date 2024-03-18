@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ms-orders
-      MYSQL_USER: admin
+      MYSQL_USER: root
       MYSQL_PASSWORD: 123456789
       MYSQL_ROOT_PASSWORD: 123456789
     ports:
