@@ -30,6 +30,7 @@
 		<module>products-service</module>
 		<module>api-gateway</module>
 		<module>discovery-server</module>
+		<module>notification-service</module>
 	</modules>
 
 	<dependencies>
