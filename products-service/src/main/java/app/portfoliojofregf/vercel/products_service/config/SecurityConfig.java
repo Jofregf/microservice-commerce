@@ -27,7 +27,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
-//                .securityMatcher("/**").authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(request ->
                                 request.getRequestURI().contains("/actuator/products")).permitAll()
