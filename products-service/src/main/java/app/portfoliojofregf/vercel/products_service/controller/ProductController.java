@@ -37,4 +37,11 @@ public class ProductController {
     public ProductResponse getById(@PathVariable("id") Long id){
         return this.productService.fingById(id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void deleteProduct(@PathVariable("id") Long id){
+        this.productService.deleteProduct(id);
+    }
 }

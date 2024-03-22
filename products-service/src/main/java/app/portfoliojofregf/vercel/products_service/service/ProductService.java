@@ -59,6 +59,7 @@ public class ProductService {
         }
     }
     public void deleteProduct(Long id) {
-
+        ProductResponse product = this.fingById(id);
+        productRepository.deleteById(product.getId());
     }
 }
