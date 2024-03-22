@@ -30,4 +30,11 @@ public class ProductController {
     public List<ProductResponse> getAllProducts(){
         return this.productService.getAllProducts();
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ProductResponse getById(@PathVariable("id") Long id){
+        return this.productService.fingById(id);
+    }
 }

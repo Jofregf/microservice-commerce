@@ -1,5 +1,6 @@
 package app.portfoliojofregf.vercel.products_service.service;
 
+import app.portfoliojofregf.vercel.products_service.exceptions.ProductNotFoundException;
 import app.portfoliojofregf.vercel.products_service.model.dtos.ProductRequest;
 import app.portfoliojofregf.vercel.products_service.model.dtos.ProductResponse;
 import app.portfoliojofregf.vercel.products_service.model.entity.Product;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +20,6 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public void addProduct(ProductRequest productRequest) {
-
         var product = Product.builder()
                 .sku(productRequest.getSku())
                 .name(productRequest.getName())
@@ -46,5 +47,18 @@ public class ProductService {
                 .price(product.getPrice())
                 .status(product.getStatus())
                 .build();
+    }
+
+    public ProductResponse fingById(Long id){
+        Optional<Product> productOpt = productRepository.findById(id);
+        if(productOpt.isPresent()){
+            Product product = productOpt.get();
+            return mapToProductResponse(product);
+        } else {
+            throw new ProductNotFoundException("Product not found with Id: " + id);
+        }
+    }
+    public void deleteProduct(Long id) {
+
     }
 }
