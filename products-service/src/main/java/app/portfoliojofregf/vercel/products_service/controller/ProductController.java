@@ -44,4 +44,11 @@ public class ProductController {
     public void deleteProduct(@PathVariable("id") Long id){
         this.productService.deleteProduct(id);
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ProductResponse updateProduct(@PathVariable("id") Long id, @RequestBody ProductRequest productRequest){
+        return this.productService.editProductById(id, productRequest);
+    }
 }

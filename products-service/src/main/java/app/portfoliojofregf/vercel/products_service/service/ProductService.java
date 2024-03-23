@@ -62,4 +62,18 @@ public class ProductService {
         ProductResponse product = this.fingById(id);
         productRepository.deleteById(product.getId());
     }
+
+    public ProductResponse editProductById(Long id, ProductRequest productRequest){
+        ProductResponse productResponse = this.fingById(id);
+        var product = Product.builder()
+                .id(productResponse.getId())
+                .sku(productRequest.getSku())
+                .name(productRequest.getName())
+                .description(productRequest.getDescription())
+                .price(productRequest.getPrice())
+                .status(productRequest.getStatus())
+                .build();
+        productRepository.save(product);
+        return mapToProductResponse(product);
+    }
 }
