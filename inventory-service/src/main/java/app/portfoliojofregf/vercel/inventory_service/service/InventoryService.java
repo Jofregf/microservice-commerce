@@ -39,4 +39,16 @@ public class InventoryService {
         });
         return errorList.size() > 0 ? new BaseResponse(errorList.toArray(new String[0])) : new BaseResponse(null);
     }
+
+    public List<Inventory> getAll(){
+        return this.inventoryRepository.findAll();
+    }
+
+    public Inventory getById(Long id){
+        return this.inventoryRepository.findById(id).orElse(null);
+    }
+
+    public boolean existById(Long id){
+        return this.inventoryRepository.existsById(id);
+    }
 }
