@@ -14,7 +14,7 @@ public class OrderEventListener {
     public void handleOrdersNotifications(String message) {
         var orderEvent = JsonUtils.fromJson(message, OrderEvent.class);
 
-        // Enviar email al cliente, enviar sms al cliente, etc.
+        // Enviar email al cliente, sms al cliente, etc.
         // Notificar a otros service...
 
         log.info("Order {} event received for order : {} with {} items",
