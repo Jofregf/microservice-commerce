@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -60,6 +61,20 @@ public class OrderService {
     public List<OrderResponse> getAllOrders(){
         List<Order> orders = this.orderRepository.findAll();
         return orders.stream().map(this::mapToOrderResponse).toList();
+    }
+
+    public OrderResponse getById(Long id){
+        Optional<Order> orderOpt = orderRepository.findById(id);
+        if(orderOpt.isPresent()){
+            Order order = orderOpt.get();
+            return mapToOrderResponse(order);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean existById(Long id){
+        return orderRepository.existsById(id);
     }
 
     private OrderResponse mapToOrderResponse(Order order) {

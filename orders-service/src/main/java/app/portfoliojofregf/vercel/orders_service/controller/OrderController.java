@@ -35,4 +35,10 @@ public class OrderController {
     private ResponseEntity<OrderResponse> placeOrderFallback(OrderRequest orderRequest, Throwable throwable) {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public OrderResponse findById(@PathVariable("id") Long id) {
+        return this.orderService.getById(id);
+    }
 }
